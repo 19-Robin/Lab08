@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float score;
+    public Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +19,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        scoreText.text = "Score: " + score;
         float verticalInput = Input.GetAxis("Vertical");
         transform.position = transform.position + new Vector3(0 , verticalInput * speed * Time.deltaTime, 0);
         
@@ -26,9 +31,15 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, -3.88f);
         }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
 
-
-
+    private void OnTriggerEnter(Collider other)
+    {
+        score++;
     }
 }
