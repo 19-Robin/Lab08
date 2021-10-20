@@ -16,10 +16,19 @@ public class Player : MonoBehaviour
     {
 
         float verticalInput = Input.GetAxis("Vertical");
-
         transform.position = transform.position + new Vector3(0 , verticalInput * speed * Time.deltaTime, 0);
+        
+        if (transform.position.y > 3.88f)
+        {
+            transform.position =  new Vector2(transform.position.x,3.88f);
+        }
+        else if(transform.position.y < -3.88f)
+        {
+            transform.position = new Vector2(transform.position.x, -3.88f);
+        }
 
-      
+
+
 
     }
 }
